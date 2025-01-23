@@ -9,7 +9,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt = $conn->prepare("INSERT INTO users (faculty_number, user_name, password_hash) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $facultyNumber, $user_name, $password_hash);
-    $stmt->close();
     try {
         $stmt->execute();
         session_start();
@@ -18,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } catch (Exception $e) {
         header("Location: register.php?error=1&faculty_number=$facultyNumber&user_name=$user_name");
     }
+    $stmt->close();
     exit;
 }
 ?>

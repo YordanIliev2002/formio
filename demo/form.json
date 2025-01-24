@@ -1,0 +1,52 @@
+{
+    "title": "Employee survey",
+    "description": "Hello, please express your opinion about your wellbeing and satisfaction at work.",
+    "accessCode": "1234",
+    "theme": "blue",
+    "fields": [
+        {
+            "type": "text",
+            "name": "name",
+            "label": "Name",
+            "required": false
+        },
+        {
+            "type": "multiple_choice",
+            "name": "company_leadership_rating",
+            "label": "Rate the company leadership",
+            "required": true,
+            "choices": [
+                "Very poor",
+                "Poor",
+                "Average",
+                "Good",
+                "Very good"
+            ]
+        },
+        {
+            "type": "textarea",
+            "name": "company_leadership_free_text",
+            "label": "Write any feedback you have to the company leadership",
+            "required": false
+        },
+        {
+            "type": "multiple_choice",
+            "name": "line_manager_rating",
+            "label": "Rate your line manager",
+            "required": true,
+            "choices": [
+                "Very poor",
+                "Poor",
+                "Average",
+                "Good",
+                "Very good"
+            ]
+        },
+        {
+            "type": "textarea",
+            "name": "line_manager_free_text",
+            "label": "Write any feedback you have for your line manager",
+            "required": false
+        }
+    ]
+}

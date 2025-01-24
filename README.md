@@ -1,7 +1,9 @@
+## How to run the project
+- start the DB and Apache from XAMPP
+- click on the "admin" panel next to the DB in XAMPP. This should open myPhpAdmin
+- open the SQL tab and paste the content of `db.sql`. This will create the DB and tables.
+- launch the application
 ```shell
-docker rm formio-mysql
-docker run --name formio-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=formio-password -d mysql:8
-docker exec -it formio-mysql bash
-mysql -p
-<enter the password>
+cd php
+C:\xampp\php\php.exe -S localhost:8000
 ```

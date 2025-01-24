@@ -14,3 +14,13 @@ CREATE TABLE IF NOT EXISTS forms (
     form_definition JSON NOT NULL,
     FOREIGN KEY (author_fn) REFERENCES users(faculty_number)
 );
+
+CREATE TABLE IF NOT EXISTS responses (
+    form_id VARCHAR(36) NOT NULL,
+    author_fn VARCHAR(255) NOT NULL,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    response JSON NOT NULL,
+    PRIMARY KEY (form_id, author_fn),
+    FOREIGN KEY (form_id) REFERENCES forms(id),
+    FOREIGN KEY (author_fn) REFERENCES users(faculty_number)
+);

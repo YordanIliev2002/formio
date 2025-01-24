@@ -3,10 +3,11 @@ session_start();
 if (isset($_SESSION["user_faculty_number"])) {
     // fetch the user's forms
     require 'utils/db_connection.php';
-    $stmt = $conn->prepare("SELECT id, form_definition->>'$.title' as 'title' FROM forms WHERE author_fn = ?");
+    $stmt = $conn->prepare("SELECT id, form_definition->>'$.title' AS 'title', (SELECT count(*) from responses r where r.form_id = f.id) AS 'response_count' FROM forms f WHERE author_fn = ?");
     $stmt->bind_param("s", $_SESSION["user_faculty_number"]);
     $stmt->execute();
     $user_forms = $stmt->get_result();
+    $stmt->close();
 }
 ?>
 
@@ -27,7 +28,7 @@ if (isset($_SESSION["user_faculty_number"])) {
             <ul>
                 <?php while ($row = $user_forms->fetch_assoc()): ?>
                     <li>
-                        <a href="form.php?id=<?= $row["id"] ?>"><?= htmlspecialchars($row["title"]) ?></a>
+                        <a href="form.php?id=<?= $row["id"] ?>"><?= htmlspecialchars($row["title"]) ?></a> (Filled in <?= $row["response_count"] ?> times)
                     </li>
                 <?php endwhile; ?>
             </ul>

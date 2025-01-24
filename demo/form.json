@@ -24,7 +24,7 @@
             ]
         },
         {
-            "type": "text",
+            "type": "textarea",
             "name": "company_leadership_free_text",
             "label": "Write any feedback you have to the company leadership",
             "required": false
@@ -43,7 +43,7 @@
             ]
         },
         {
-            "type": "text",
+            "type": "textarea",
             "name": "line_manager_free_text",
             "label": "Write any feedback you have for your line manager",
             "required": false

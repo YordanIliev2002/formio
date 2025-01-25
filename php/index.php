@@ -28,7 +28,9 @@ if (isset($_SESSION["user_faculty_number"])) {
             <ul>
                 <?php while ($row = $user_forms->fetch_assoc()): ?>
                     <li>
-                        <a href="form.php?id=<?= $row["id"] ?>"><?= htmlspecialchars($row["title"]) ?></a> (Filled in <?= $row["response_count"] ?> times)
+                        <a href="form.php?id=<?= $row["id"] ?>"><?= htmlspecialchars($row["title"]) ?></a>
+                        (Filled in <?= $row["response_count"] ?> times)
+                        <a href="statistics.php?form_id=<?= $row["id"] ?>">Statistics</a>
                     </li>
                 <?php endwhile; ?>
             </ul>

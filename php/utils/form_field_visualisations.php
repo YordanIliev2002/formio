@@ -49,6 +49,16 @@ function visualizeField($field) {
                 echo "ERROR: Missing or invalid options for multiple choice field.";
             }
             break;
+        case "file":
+            ?>
+            <input type="file"
+                id="<?= htmlspecialchars($field["name"]) ?>"
+                name="<?= htmlspecialchars($field["name"]) ?>"
+                accept="<?= htmlspecialchars($field["fileType"]) ?>"
+                <?php if ($field["required"]) { echo "required"; } ?>
+            ></input>
+            <?php
+        break;
         default:
             echo "ERROR: Unknown field type " . $field["type"];
     }

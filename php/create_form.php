@@ -1,6 +1,5 @@
 <?php
-session_start();
-// TODO - assert that the user is logged in
+require 'utils/assert_user_is_logged_in.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require 'utils/db_connection.php';
     $formDefinition = $_POST["form_definition"];

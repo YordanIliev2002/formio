@@ -1,21 +1,18 @@
 <?php
-session_start();
+require 'utils/assert_user_is_logged_in.php';
+require 'utils/form_field_visualisations.php';
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // TODO - filter extra fields in post request
     // TODO - validate the form
-    // TODO - validate the access code
 
     require 'utils/db_connection.php';
+    require 'utils/queries.php';
+    $formDefinition = getFormDefinition($_POST["form_id"]);
 
-    // TODO - copy paste!
-    $stmt = $conn->prepare("SELECT form_definition FROM forms WHERE id = ?");
-    $stmt->bind_param("i", $_POST["form_id"]);
-    $stmt->execute();
-    $stmt->bind_result($formDefinition);
-    $stmt->fetch();
-    $stmt->close();
-    // TODO - test with UTF 8
-    $formDefinition = json_decode($formDefinition, true); 
+    if (isset($_GET["access_code"]) && isset($formDefinition["accessCode"]) && $formDefinition["accessCode"] != $_GET["access_code"]) {
+        header("Location: form.php?id=" . $_GET["id"] . "&access_code_error=1");
+        exit;
+    }
 
     $keysToKeep = array_map(function ($fieldDef) {
         return $fieldDef["name"];
@@ -34,80 +31,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sss", $_POST["form_id"], $_SESSION["user_faculty_number"], $response);
     $stmt->execute();
     $stmt->close();
+    header("Location: index.php");
     exit;
 } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    // TODO - verify the access code
     if (!isset($_GET["id"])) {
-        echo "No id";
+        header("Location: index.php");
         exit;
     }
-    require 'utils/db_connection.php';
-    $stmt = $conn->prepare("SELECT form_definition FROM forms WHERE id = ?");
-    $stmt->bind_param("i", $_GET["id"]);
-    $stmt->execute();
-    $stmt->bind_result($formDefinition);
-    $stmt->fetch();
-    // TODO - test with UTF 8
-    $formDefinition = json_decode($formDefinition, true); 
-    $conn->close();
-}
-?>
-<?php
-// TODO - move to a new file?
-function visualizeField($field) {
-    echo '<label for="' . htmlspecialchars($field["name"]) . '">' . htmlspecialchars($field["label"]) . '</label>';
-    if ($field["required"]) {
-        // TODO - no inline css
-        echo '<span style="color: red; padding-left: 5px">*</span>';
+    require 'utils/queries.php';
+    $formDefinition = getFormDefinition($_GET["id"]);
+
+    if (isset($_GET["access_code"]) && isset($formDefinition["accessCode"]) && $formDefinition["accessCode"] != $_GET["access_code"]) {
+        header("Location: form.php?id=" . $_GET["id"] . "&access_code_error=1");
+        exit;
     }
-    echo "<br>";
-    switch ($field["type"]) {
-        case "text":
-            ?>
-            <input
-                type="text"
-                id="<?= htmlspecialchars($field["name"]) ?>"
-                name="<?= htmlspecialchars($field["name"]) ?>"
-                <?php if ($field["required"]) { echo "required"; } ?>
-            >
-            <?php
-        break;
-        case "textarea":
-            ?>
-            <textarea
-                id="<?= htmlspecialchars($field["name"]) ?>"
-                name="<?= htmlspecialchars($field["name"]) ?>"
-                rows="5"
-                cols="40"
-                <?php if ($field["required"]) { echo "required"; } ?>
-            ></textarea>
-            <?php
-        break;
-        case "multiple_choice":
-            if (!empty($field["choices"]) && is_array($field["choices"])) {
-                ?>
-                <select
-                    id="<?= htmlspecialchars($field["name"]) ?>"
-                    name="<?= htmlspecialchars($field["name"]) ?>"
-                    <?php if ($field["required"]) { echo "required"; } ?>
-                >
-                    <option value="" selected disabled>-- Please select --</option>
-                    <?php foreach ($field["choices"] as $option) { ?>
-                        <option value="<?= htmlspecialchars($option) ?>">
-                            <?= htmlspecialchars($option) ?>
-                        </option>
-                    <?php } ?>
-                </select>
-                <?php
-            } else {
-                echo "ERROR: Missing or invalid options for multiple choice field.";
-            }
-            break;
-        default:
-            echo "ERROR: Unknown field type " . $field["type"];
-    }
-    // TODO - no br
-    echo "<br>";
 }
 ?>
 
@@ -121,12 +58,26 @@ function visualizeField($field) {
     <p>
         <?= htmlspecialchars($formDefinition["description"]) ?>
     </p>
-    <form method="POST" action="form.php">
-        <input type="hidden" name="form_id" value="<?= htmlspecialchars($_GET["id"]) ?>">
-        <?php foreach ($formDefinition["fields"] as $field) { ?>
-            <?php visualizeField($field); ?>
-        <?php } ?>
-        <input type="submit" value="Submit">
-    </form>
+    <?php if (!isset($_GET["access_code"]) && isset($formDefinition["accessCode"])): ?>
+        <?php if (isset($_GET["access_code_error"])): ?>
+            <p style="color: red;">Access code is incorrect. Please try again.</p>
+        <?php endif; ?>
+        <p>This form requires an access code.</p>
+        <form method="GET" action="form.php">
+            <input type="hidden" name="id" value="<?= htmlspecialchars($_GET["id"]) ?>">
+            <input type="text" name="access_code" placeholder="Access Code">
+            <button type="submit">Submit</button>
+        </form>
+    <?php else: ?>
+        <form method="POST" action="form.php">
+            <input type="hidden" name="form_id" value="<?= htmlspecialchars($_GET["id"]) ?>">
+            <input type="hidden" name="access_code" value="<?= htmlspecialchars($_GET["access_code"]) ?>">
+            <?php foreach ($formDefinition["fields"] as $field): ?>
+                <?php visualizeField($field); ?>
+            <?php endforeach; ?>
+            <input type="submit" value="Submit">
+        </form>
+    <?php endif; ?>
+</body>
 </body>
 </html>

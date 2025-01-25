@@ -1,0 +1,3 @@
+<?php
+$UPLOAD_PATH = __DIR__ . DIRECTORY_SEPARATOR . "../../uploads" . DIRECTORY_SEPARATOR;
+?>

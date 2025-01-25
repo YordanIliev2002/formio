@@ -21,7 +21,7 @@
             foreach($dbData as $tableData) {
                  $data[] = json_decode($tableData['response'], true);
             }
-            $jsonData = json_encode($data, JSON_PRETTY_PRINT);
+            $jsonData = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 // TODO - check if downloader is the right one
             header('Content-Type: application/json');
             header('Content-Disposition: attachment; filename="responses.json"');
@@ -47,6 +47,8 @@
 
 
     </form>
+
+    <a href="index.php">Return to Home</a>
     <p>Table of submissions: </p>
     <table>
          <?php foreach ($dbData as $data): ?>

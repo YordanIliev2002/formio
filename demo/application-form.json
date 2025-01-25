@@ -1,0 +1,33 @@
+{
+    "title": "Application form",
+    "description": "Apply for our new position as a Head of Marketing",
+    "theme": "blue",
+    "fields": [
+        {
+            "type": "text",
+            "name": "name",
+            "label": "Name",
+            "required": true
+        },
+        {
+            "type": "text",
+            "name": "email",
+            "label": "Email",
+            "required": true
+        },
+        {
+            "type": "file",
+            "name": "profile_picture",
+            "label": "Profile picture",
+            "required": false,
+            "fileType": "image/*"
+        },
+        {
+            "type": "file",
+            "name": "cv",
+            "label": "CV",
+            "required": true,
+            "fileType": ".pdf"
+        }
+    ]
+}

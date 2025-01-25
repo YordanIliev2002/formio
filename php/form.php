@@ -1,6 +1,7 @@
 <?php
 require 'utils/assert_user_is_logged_in.php';
 require 'utils/form_field_visualisations.php';
+require "utils/constants.php";
 
 function hasUserFilledForm($formId) {
     require 'utils/db_connection.php';
@@ -32,6 +33,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($keysToKeep as $key) {
         if (isset($_POST[$key])) {
             $fieldsAndValues[$key] = $_POST[$key];
+        }
+    }
+
+    foreach ($formDefinition["fields"] as $field) {
+        if ($field["type"] === "file") {
+            $file = $_FILES[$field["name"]];
+            if ($file["error"] !== UPLOAD_ERR_NO_FILE) {
+                $fileExt = strtolower(pathinfo($file["name"], PATHINFO_EXTENSION));
+                $fileId = uniqid();
+                $targetFile = $UPLOAD_PATH . $fileId . "." . $fileExt;
+
+                $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+                $host = $_SERVER['HTTP_HOST'];
+                $fileUrl = $protocol . $host . "/files.php?id=" . urlencode($fileId . "." . $fileExt);
+
+                if (move_uploaded_file($file["tmp_name"], $targetFile)) {
+                    $fieldsAndValues[$field["name"]] = $fileUrl;
+                } else {
+                    echo "Sorry, there was an error uploading your file $targetFile";
+                    exit;
+                }
+            }
         }
     }
     $response = json_encode($fieldsAndValues, JSON_UNESCAPED_UNICODE);
@@ -86,9 +109,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit">Submit</button>
         </form>
     <?php else: ?>
-        <form method="POST" action="form.php">
+        <form method="POST" action="form.php" enctype="multipart/form-data">
             <input type="hidden" name="form_id" value="<?= htmlspecialchars($_GET["id"]) ?>">
-            <input type="hidden" name="access_code" value="<?= htmlspecialchars($_GET["access_code"]) ?>">
+            <input type="hidden" name="access_code" value="<?= htmlspecialchars($_GET["access_code"] ?? '') ?>">
             <?php foreach ($formDefinition["fields"] as $field): ?>
                 <?php visualizeField($field); ?>
             <?php endforeach; ?>

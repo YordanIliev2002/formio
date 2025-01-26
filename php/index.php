@@ -23,26 +23,39 @@ if (isset($_SESSION["user_faculty_number"])) {
     <?php if (isset($_SESSION["user_faculty_number"])): ?>
 
         <section id="logged_buttons">
+            <button id="button_logged">Hello, <?= $_SESSION["user_faculty_number"]?></button>
             <button onclick="location.href='create_form.php'" id="button_logged">Create a new form</button>
             <button onclick="location.href='logout.php'" id="button_logged">Logout</button>
         </section>
         <section id="logged_your_forms">
-            <p id="hello">Hello, <?= htmlspecialchars($_SESSION["user_faculty_number"]) ?></p>
             <h2>Your forms</h2>
-            <ul>
+            <table>
+                <thead>
+                <tr>
+                    <th>Form name</th>
+                    <th>Open</th>
+                    <th>Copy URL</th>
+                    <th>Submissions</th>
+                    <th>Invite users</th>
+                    <th>Statistics</th>
+                </tr>
+                </thead>
                 <?php while ($row = $user_forms->fetch_assoc()): ?>
                     <?php
-                    $form_url = "http://localhost:8000/form.php?id=" . urlencode($row["id"]);
+                    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+                    $host = $_SERVER['HTTP_HOST'];
+                    $form_url = $protocol . $host . "/form.php?id=" . urlencode($row["id"]);
                     ?>
-                    <li>
-                        <a href="form.php?id=<?= $row["id"] ?>"><?= htmlspecialchars($row["title"]) ?></a>
-                        <a href="statistics.php?form_id=<?= $row["id"] ?>" id="stat_link">Statistics</a>
-                        <button onclick="copyToClipboard('<?= $form_url ?>')" id="button_url">Copy Url to Clipboard</button>
-                        <a href="invite_users.php?form_id=<?= $row["id"] ?>" id = "invite_users">Invite Users</a>
-                        <p id="filled">(Filled in <?= $row["response_count"] ?> times)</p>
-                    </li>
+                    <tr>
+                    <td><?= htmlspecialchars($row["title"]) ?></td>
+                    <td><button onclick="location.href='/form.php?id=<?= $row["id"] ?>'" id="button_url">Open</button></td>
+                    <td><button onclick="copyToClipboard('<?= $form_url ?>')" id="button_url">Copy URL</button></td>
+                    <td><p id="filled"><?= $row["response_count"] ?></p></td>
+                    <td><a href="invite_users.php?form_id=<?= $row["id"] ?>" id = "invite_users">Invite users</a></td>
+                    <td><a href="statistics.php?form_id=<?= $row["id"] ?>" id="stat_link">Statistics</a></td>
+                    </tr>
                 <?php endwhile; ?>
-            </ul>
+            </table>
         </section>
     <?php else: ?>
         <h2 id="welcome">Welcome to Formio!</h2>
@@ -64,7 +77,6 @@ if (isset($_SESSION["user_faculty_number"])) {
             textarea.select();
             document.execCommand('copy');
             document.body.removeChild(textarea);
-            alert("URL copied to clipboard: " + url);
         }
     </script>
 </body>

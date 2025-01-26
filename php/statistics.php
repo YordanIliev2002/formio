@@ -39,25 +39,29 @@
 <!DOCTYPE HTML>
 <html>
     <head><title>Form statistics</title></head>
+    <link rel="stylesheet" href="/css/statistics_style.css">
     <body>
-        <p>You can export the answers to this form in JSON file with the button below: </p>
+    <section id="buttons">
     <form method="post">
         <input type="hidden" name="form_id" value="<?= htmlspecialchars($_GET["form_id"]) ?>">
-        <button type="submit" name="export">Export</button>
-
-
+        <button type="submit" name="export" id = "export_button">Export</button>
     </form>
 
-    <a href="index.php">Return to Home</a>
-    <p>Table of submissions: </p>
+    <a href="index.php" id="return_home">Return to Home</a>
+    </section>
+    
     <table>
+    <caption>Table of submissions: </caption>
+        <thead>
+        <tr>
+            <th>Author Name</th>
+            <th>Submitted At:</th>
+        </tr>
+        </thead>
          <?php foreach ($dbData as $data): ?>
-            <tr>
-                <td>Author Name</td>
+            
+            <tr>        
                 <td><?php echo htmlspecialchars($data['author_fn']); ?></td>
-            </tr>
-            <tr>
-                <td>Submitted Date</td>
                 <td><?php echo htmlspecialchars($data['submitted_at']); ?></td>
             </tr>
         <?php endforeach; ?>

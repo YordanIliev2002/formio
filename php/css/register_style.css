@@ -40,9 +40,9 @@ form{
 input[type="submit"] {
     background-color: var(--secondary-color);
     color: var(--text-color);
-    border: none; 
     padding: 5px 15px;
-    
+    border: 2px solid var(--accent-color);
+    border-radius: 12px;
 }
 
 input[type="submit"]:hover {

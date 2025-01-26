@@ -24,12 +24,6 @@ body{
     border-radius: 12px;
 }
 
-#form{
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-}
-
 form{
     display: flex;
     flex-direction: column;
@@ -39,9 +33,9 @@ form{
 input[type="submit"] {
     background-color: var(--secondary-color);
     color: var(--text-color);
-    padding: 5px 15px;
     border: 2px solid var(--accent-color);
-    border-radius: 12px;
+    padding: 5px 15px;
+    border-radius: 8px;
     
 }
 
@@ -49,6 +43,7 @@ input[type="submit"]:hover {
     background-color: var(--accent-color);
 }
 
-#login{
-    text-align: center; 
+#form_definition{
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
 }

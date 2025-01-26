@@ -51,8 +51,9 @@ body{
 #button_not_logged{
     background-color: var(--secondary-color);
     color: var(--text-color);
-    border: none; 
     padding: 5px 15px;
+    border: 2px solid var(--accent-color);
+    border-radius: 12px;
 }
 
 #button_logged:hover{
@@ -85,7 +86,7 @@ body{
     text-align: left; 
 }
 
-#stat_link{
+#stat_link, #button_url{
     display: inline-block; 
     padding: 5px 15px;
     background-color: var(--primary-color);
@@ -94,26 +95,9 @@ body{
     text-decoration: none; 
     border-radius: 5px; 
     border: 2px solid var(--accent-color);
-    font-size: 16px;
-    cursor: pointer;
-}
-#stat_link:hover{
-    background-color: var(--secondary-color);
 }
 
-#button_url{
-    display: inline-block; 
-    padding: 5px 15px;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    text-align: center;
-    text-decoration: none; 
-    border-radius: 5px; 
-    border: 2px solid var(--accent-color);
-    font-size: 16px;
-    cursor: pointer;
-}
-#button_url:hover{
+#stat_link:hover, #button_url:hover{
     background-color: var(--secondary-color);
 }
 

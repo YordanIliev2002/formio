@@ -38,6 +38,7 @@ if (isset($_SESSION["user_faculty_number"])) {
                         <a href="form.php?id=<?= $row["id"] ?>"><?= htmlspecialchars($row["title"]) ?></a>
                         <a href="statistics.php?form_id=<?= $row["id"] ?>" id="stat_link">Statistics</a>
                         <button onclick="copyToClipboard('<?= $form_url ?>')" id="button_url">Copy Url to Clipboard</button>
+                        <a href="invite_users.php?form_id=<?= $row["id"] ?>" id = "invite_users">Invite Users</a>
                         <p id="filled">(Filled in <?= $row["response_count"] ?> times)</p>
                     </li>
                 <?php endwhile; ?>

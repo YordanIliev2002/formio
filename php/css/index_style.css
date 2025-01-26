@@ -86,7 +86,7 @@ body{
     text-align: left; 
 }
 
-#stat_link, #button_url{
+#stat_link, #button_url, #invite_users{
     display: inline-block; 
     padding: 5px 15px;
     background-color: var(--primary-color);
@@ -97,7 +97,7 @@ body{
     border: 2px solid var(--accent-color);
 }
 
-#stat_link:hover, #button_url:hover{
+#stat_link:hover, #button_url:hover, #invite_users:hover{
     background-color: var(--secondary-color);
 }
 

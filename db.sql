@@ -24,3 +24,12 @@ CREATE TABLE IF NOT EXISTS responses (
     FOREIGN KEY (form_id) REFERENCES forms(id),
     FOREIGN KEY (author_fn) REFERENCES users(faculty_number)
 );
+
+CREATE TABLE IF NOT EXISTS invites(
+    form_id VARCHAR(36) NOT NULL,
+    faculty_number VARCHAR(36) NOT NULL,
+    did_submit BOOLEAN,
+    PRIMARY KEY (form_id, faculty_number),
+    FOREIGN KEY (form_id) REFERENCES forms(id),
+    FOREIGN KEY (faculty_number) REFERENCES users(faculty_number)
+);

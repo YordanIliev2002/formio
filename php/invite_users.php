@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     foreach ($faculty_nums_array as $faculty_num) {
         if (!empty($faculty_num)) {
-            $stmt = $conn->prepare("INSERT INTO invites (form_id, faculty_number, did_submit) VALUES (?, ?, 0)");
+            $stmt = $conn->prepare("INSERT INTO invites (form_id, faculty_number, did_submit) VALUES (?, ?, false)");
             $stmt->bind_param("ss", $form_id, $faculty_num);
             $stmt->execute();
             $stmt->close();

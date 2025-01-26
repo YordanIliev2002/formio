@@ -6,7 +6,7 @@ require "utils/constants.php";
 function hasUserFilledForm($formId) {
     require 'utils/db_connection.php';
     $stmt = $conn->prepare("SELECT COUNT(*) FROM responses WHERE form_id = ? AND author_fn = ?");
-    $stmt->bind_param("is", $formId, $_SESSION["user_faculty_number"]);
+    $stmt->bind_param("ss", $formId, $_SESSION["user_faculty_number"]);
     $stmt->execute();
     $stmt->bind_result($count);
     $stmt->fetch();
@@ -62,6 +62,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require 'utils/db_connection.php';
     $stmt = $conn->prepare("INSERT INTO responses (form_id, author_fn, response) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $_POST["form_id"], $_SESSION["user_faculty_number"], $response);
+    $stmt->execute();
+    $stmt->close();
+    $stmt = $conn->prepare("UPDATE invites SET did_submit = ? WHERE form_id = ? AND faculty_number = ?");
+    $did_submit_const = 1;
+    $stmt->bind_param("iss", $did_submit_const, $_POST["form_id"], $_SESSION["user_faculty_number"]);
     $stmt->execute();
     $stmt->close();
     header("Location: form.php?id=" . $_POST["form_id"] . "&success=1");

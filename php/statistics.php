@@ -15,6 +15,22 @@
         }
         
     }
+    $dbDataInvites = [];
+    $stmt = $conn->prepare("SELECT * FROM invites WHERE form_id = ?");
+    $stmt->bind_param("s",$formId );
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if($result->num_rows > 0){
+        while ($row = $result->fetch_assoc()) {
+             $dbDataInvites[] = [
+                'faculty_number' => $row['faculty_number'],
+                'did_submit' => ($row['did_submit'] == 0) ? "𝕏" : "✓"
+             ];
+        }
+        
+    }
+
     if(isset($_POST['export'])){
         $data = [];
         if($result->num_rows > 0){
@@ -49,22 +65,38 @@
 
     <a href="index.php" id="return_home">Return to Home</a>
     </section>
-    
+    <section id="tables">
     <table>
     <caption>Table of submissions: </caption>
         <thead>
         <tr>
             <th>Author Name</th>
-            <th>Submitted At:</th>
+            <th>Submitted At</th>
         </tr>
         </thead>
          <?php foreach ($dbData as $data): ?>
             
             <tr>        
-                <td><?php echo htmlspecialchars($data['author_fn']); ?></td>
-                <td><?php echo htmlspecialchars($data['submitted_at']); ?></td>
+            <td><?php echo htmlspecialchars($data['author_fn']); ?></td>
+            <td><?php echo htmlspecialchars($data['submitted_at']); ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
+    <table>
+    <caption>Table of invites: </caption>
+        <thead>
+        <tr>
+            <th>Faculty Number</th>
+            <th>Has submitted</th>
+        </tr>
+        </thead>
+         <?php foreach ($dbDataInvites as $data): ?>
+            <tr>        
+            <td><?php echo htmlspecialchars($data['faculty_number']); ?></td>
+            <td style="color: <?= ($data['did_submit']== "✓") ? 'green' : 'red'; ?>;"><?php echo htmlspecialchars($data['did_submit']); ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+    </section>
     </body>
 </html>

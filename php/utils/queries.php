@@ -2,7 +2,7 @@
 function getFormDefinition($formId) {
     require "db_connection.php";
     $stmt = $conn->prepare("SELECT form_definition FROM forms WHERE id = ?");
-    $stmt->bind_param("i", $formId);
+    $stmt->bind_param("s", $formId);
     $stmt->execute();
     $formDefinition = "";
     $stmt->bind_result($formDefinition);

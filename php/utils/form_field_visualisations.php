@@ -1,12 +1,8 @@
 
 <?php
 function visualizeField($field) {
-    echo '<label for="' . htmlspecialchars($field["name"]) . '">' . htmlspecialchars($field["label"]) . '</label>';
-    if ($field["required"]) {
-        // TODO - no inline css
-        echo '<span style="color: red; padding-left: 5px">*</span>';
-    }
-    echo "<br>";
+    $maybeRequiredElement = $field["required"] ? '<span style="color: red; padding-left: 5px">*</span>' : '';
+    echo '<label for="' . htmlspecialchars($field["name"]) . '">' . htmlspecialchars($field["label"]) . $maybeRequiredElement . '</label>';
     switch ($field["type"]) {
         case "text":
             ?>
@@ -62,7 +58,5 @@ function visualizeField($field) {
         default:
             echo "ERROR: Unknown field type " . $field["type"];
     }
-    // TODO - no br
-    echo "<br>";
 }
 ?>

@@ -30,7 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- TODO - validate the form on the client side too, for better feedback -->
         <label for="form_definition">Form definition:</label>
         <textarea id="form_definition" name="form_definition" rows="5" cols="33" placeholder="Put your form json definition here..."></textarea>
-        <input type="submit" value="Create form">
+        <input type="submit" value="Create form" class="primary-button">
+        <button type="button" onclick="location.href='index.php'" class="primary-button" >Return to Home instead</button>
     </form>
     </section>
 </body>

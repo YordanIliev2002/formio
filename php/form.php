@@ -85,8 +85,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title><?= htmlspecialchars($formDefinition["title"]) ?></title>
+    <link rel="stylesheet" href="/css/form_style.css">
 </head>
 <body>
+    <section id="box">
     <h2><?= htmlspecialchars($formDefinition["title"]) ?></h2>
     <p>
         <?= htmlspecialchars($formDefinition["description"]) ?>
@@ -97,16 +99,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php else: ?>
             <p>You have already filled this form.</p>
         <?php endif; ?>
-        <a href="index.php">Return to Home</a>
+        <button onclick="location.href='index.php'" class="primary-button" >Return to Home</button>
     <?php elseif (!isset($_GET["access_code"]) && isset($formDefinition["accessCode"])): ?>
-        <?php if (isset($_GET["access_code_error"])): ?>
-            <p style="color: red;">Access code is incorrect. Please try again.</p>
-        <?php endif; ?>
         <p>This form requires an access code.</p>
+        <?php if (isset($_GET["access_code_error"])): ?>
+            <p style="color: red;">This access code is incorrect. Please try again.</p>
+        <?php endif; ?>
         <form method="GET" action="form.php">
             <input type="hidden" name="id" value="<?= htmlspecialchars($_GET["id"]) ?>">
-            <input type="text" name="access_code" placeholder="Access Code">
-            <button type="submit">Submit</button>
+            <input type="text" name="access_code" placeholder="Access Code" class="text-field">
+            <section>
+                <button type="submit" class="primary-button">Submit</button>
+                <button type="button" onclick="location.href='index.php'" class="primary-button" >Return to Home</button>
+            </section>
         </form>
     <?php else: ?>
         <form method="POST" action="form.php" enctype="multipart/form-data">
@@ -115,9 +120,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <?php foreach ($formDefinition["fields"] as $field): ?>
                 <?php visualizeField($field); ?>
             <?php endforeach; ?>
-            <input type="submit" value="Submit">
+            <section>
+                <input type="submit" class="primary-button" value="Submit">
+                <button type="button" onclick="location.href='index.php'" class="primary-button" >Return to Home</button>
+            </section>
         </form>
     <?php endif; ?>
-</body>
+    </section>
 </body>
 </html>

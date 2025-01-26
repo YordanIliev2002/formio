@@ -26,9 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Register</title>
+    <link rel="stylesheet" href="/css/register_style.css">
 </head>
 <body>
-    <h2>Register</h2>
+    <section id="box">
+    <h2 id = "register">Register</h2>
+    <section id="form">
     <form method="POST" action="register.php">
         <label for="faculty_number">Faculty Number:</label>
         <input type="text" name="faculty_number" id="faculty_number" required value="<?= htmlspecialchars($_GET['faculty_number'] ?? '') ?>">
@@ -44,5 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php endif ?>
         <input type="submit" value="Register">
     </form>
+    </section>
+    </section>
 </body>
 </html>

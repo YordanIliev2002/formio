@@ -1,0 +1,49 @@
+:root {
+    --primary-color: #E8F9FF;    
+    --secondary-color: #C4D9FF;  
+    --accent-color: #C5BAFF;    
+    --background-color: #FBFBFB; 
+    --text-color: #333333;   
+}
+
+body{
+    display: flex;
+    place-items: center;
+    background-color: var(--background-color);
+    justify-content: center;
+    align-items: center;  
+    font-family: 'Lato', sans-serif;
+    height: 100vh;
+    flex-direction: column;
+}
+
+#box{
+    background-color: var(--primary-color);
+    padding: 100px;
+    border: 2px solid var(--accent-color);
+    border-radius: 12px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+input[type="submit"] {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: 2px solid var(--accent-color);
+    padding: 5px 15px;
+    border-radius: 8px;
+    
+}
+
+input[type="submit"]:hover {
+    background-color: var(--accent-color);
+}
+
+#form_definition{
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+}

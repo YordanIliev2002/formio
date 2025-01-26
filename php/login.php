@@ -29,9 +29,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="/css/login_style.css">
 </head>
 <body>
-    <h2>Login</h2>
+    <section id="box">
+<h2 id = "login">L♡gin</h2>
+    <section id=form>
     <form method="POST" action="login.php">
         <label for="faculty_number">Faculty Number:</label>
         <input type="text" name="faculty_number" id="faculty_number" required value="<?= htmlspecialchars($_GET['faculty_number'] ?? '') ?>">
@@ -44,6 +47,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php endif ?>
 
         <input type="submit" value="Login">
+        
     </form>
+    </section>
+    </section>
 </body>
 </html>

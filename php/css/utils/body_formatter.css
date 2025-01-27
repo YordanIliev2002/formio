@@ -1,0 +1,18 @@
+:root {
+    --primary-color: #E8F9FF;    
+    --secondary-color: #C4D9FF;  
+    --accent-color: #C5BAFF;    
+    --background-color: #FBFBFB; 
+    --text-color: #333333;   
+}
+
+body{
+    display: flex;
+    place-items: center;
+    background-color: var(--background-color);
+    justify-content: center;
+    align-items: center;  
+    font-family: 'Lato', sans-serif;
+    height: 100vh;
+    flex-direction: column;
+}

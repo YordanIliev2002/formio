@@ -26,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Register</title>
+    <link rel="stylesheet" href="/css/utils/body_formatter.css">
     <link rel="stylesheet" href="/css/register_style.css">
 </head>
 <body>

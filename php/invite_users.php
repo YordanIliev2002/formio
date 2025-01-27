@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <head>
     <title>Invite Users</title>
+    <link rel="stylesheet" href="/css/utils/body_formatter.css">
     <link rel="stylesheet" href="/css/invite_users_style.css">
 </head>
 

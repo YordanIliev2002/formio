@@ -40,3 +40,7 @@ input[type="submit"] {
 #error {
     color: red;
 }
+
+#success {
+    color: green;
+}

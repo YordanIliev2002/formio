@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $faculty_nums_array = array_map('trim', preg_split('/[\r\n,]+/', $faculty_nums));
 
     $failures = [];
+    $successes = [];
     foreach ($faculty_nums_array as $faculty_num) {
         if (!empty($faculty_num)) {
             try {
@@ -13,12 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->bind_param("ss", $form_id, $faculty_num);
                 $stmt->execute();
                 $stmt->close();
+                $successes[] = $faculty_num;
             } catch (Exception $e) {
                 $failures[] = $faculty_num;
             }
         }
     }
-    $error = "Failed to invite some faculty numbers: " . implode(", ", $failures);
+    if ($failures) {
+        $error = "Failed to invite some faculty numbers: " . implode(", ", $failures);
+    }
+    if ($successes) {
+        $successMsg = "Successfully invited faculty numbers: " . implode(", ", $successes);
+    }
 
     $conn->close();
 }
@@ -41,6 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="hidden" name="form_id" value="<?= htmlspecialchars($_GET["form_id"]) ?>">
             <?php if (isset($error)) : ?>
                 <p id="error"><?= $error ?></p>
+            <?php endif; ?>
+            <?php if (isset($successMsg)) : ?>
+                <p id="success"><?= $successMsg ?></p>
             <?php endif; ?>
             <input type="submit" value="Add users" class="primary-button">
         </form>

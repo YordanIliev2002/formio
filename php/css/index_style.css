@@ -106,7 +106,7 @@ body {
 
 /* TODO - extract this to a separate file */
 table {
-    border-collapse: collapse; 
+    border-collapse: collapse;
 }
 
 th, td {

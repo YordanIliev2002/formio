@@ -17,6 +17,7 @@ function fetchInvites() {
     require 'utils/db_connection.php';
     $invites = [];
     $stmt = $conn->prepare("SELECT * FROM invites WHERE form_id = ?");
+    $formId = $_POST["form_id"] ?? $_GET["form_id"];
     $stmt->bind_param("s", $formId);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -91,7 +92,7 @@ function fetchInvites() {
          <?php foreach ($invites as $invite): ?>
             <tr>        
             <td><?php echo htmlspecialchars($invite['faculty_number']); ?></td>
-            <td style="color: <?= ($invite['did_submit']== "✓") ? 'green' : 'red'; ?>;"><?php echo htmlspecialchars($data['did_submit']); ?></td>
+            <td style="color: <?= ($invite['did_submit']== "✓") ? 'green' : 'red'; ?>;"><?php echo htmlspecialchars($invite['did_submit']); ?></td>
             </tr>
         <?php endforeach; ?>
     </table>

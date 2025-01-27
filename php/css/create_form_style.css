@@ -1,8 +1,5 @@
-#box{
-    background-color: var(--primary-color);
+#main{
     padding: 100px;
-    border: 2px solid var(--accent-color);
-    border-radius: 12px;
 }
 
 form{
@@ -17,7 +14,6 @@ form{
     border: 2px solid var(--accent-color);
     padding: 5px 15px;
     border-radius: 8px;
-    
 }
 
 .primary-button:hover {

@@ -26,11 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Register</title>
-    <link rel="stylesheet" href="/css/utils/body_formatter.css">
+    <link rel="stylesheet" href="/css/utils/common.css">
     <link rel="stylesheet" href="/css/register_style.css">
 </head>
 <body>
-    <section id="box">
+    <section id="main">
     <h2 id = "register">Register</h2>
     <section id="form">
     <form method="POST" action="register.php">
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="password" name="password" id="password" required>
         
         <?php if (isset($_GET["error"])): ?>
-          <p style="color: red;">Error occurred during reistration. Please try again.</p>
+          <p style="color: red;">Error occurred during registration. Please try again.</p>
         <?php endif ?>
         <input type="submit" value="Register">
     </form>

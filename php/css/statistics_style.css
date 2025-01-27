@@ -20,22 +20,6 @@
     background-color: var(--secondary-color);
 }
 
-table {
-
-    margin: 20px auto;
-    border-collapse: collapse; 
-}
-th, td {
-    padding: 10px;
-    text-align: center; 
-    border: 1px solid var(--accent-color);
-    background-color: var(--primary-color);
-}
-th {
-    font-weight: bold;
-}
-
 #tables {
-    display:flex;
     gap:15px;
 }

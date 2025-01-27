@@ -27,30 +27,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="/css/utils/body_formatter.css">
+    <link rel="stylesheet" href="/css/utils/common.css">
     <link rel="stylesheet" href="/css/login_style.css">
 </head>
+
 <body>
-    <section id="box">
-<h2 id = "login">L♡gin</h2>
-    <section id=form>
-    <form method="POST" action="login.php">
-        <label for="faculty_number">Faculty Number:</label>
-        <input type="text" name="faculty_number" id="faculty_number" required value="<?= htmlspecialchars($_GET['faculty_number'] ?? '') ?>">
+    <section id="main">
+        <h2 id="login">L♡gin</h2>
+        <section id="form">
+            <form method="POST" action="login.php">
+                <label for="faculty_number">Faculty Number:</label>
+                <input type="text" name="faculty_number" id="faculty_number" required value="<?= htmlspecialchars($_GET['faculty_number'] ?? '') ?>">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required>
 
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required>
-        
-        <?php if (isset($_GET["error"])): ?>
-          <p style="color: red;">Error occurred during login. Please try again.</p>
-        <?php endif ?>
+                <?php if (isset($_GET["error"])): ?>
+                    <p style="color: red;">Error occurred during login. Please try again.</p>
+                <?php endif ?>
 
-        <input type="submit" value="Login">
-        
-    </form>
-    </section>
+                <input type="submit" value="Login">
+
+            </form>
+        </section>
     </section>
 </body>
+
 </html>

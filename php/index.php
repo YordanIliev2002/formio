@@ -21,7 +21,7 @@ if (isset($_SESSION["user_faculty_number"])) {
 
 <head>
     <title>Formio</title>
-    <link rel="stylesheet" href="/css/utils/body_formatter.css">
+    <link rel="stylesheet" href="/css/utils/common.css">
     <link rel="stylesheet" href="/css/index_style.css">
 </head>
 
@@ -35,9 +35,9 @@ if (isset($_SESSION["user_faculty_number"])) {
         </section>
 
         <section id="logged_your_forms">
-        <?php if ($user_forms->num_rows == 0): ?>
-            <h2>You don't have any forms yet. Use the button in upper right corner to create one.</h2>
-           
+            <?php if ($user_forms->num_rows == 0): ?>
+                <h2>You don't have any forms yet. Use the button in upper right corner to create one.</h2>
+
             <?php else: ?>
                 <section id="tables">
                     <table>
@@ -71,28 +71,28 @@ if (isset($_SESSION["user_faculty_number"])) {
                             </tr>
                         <?php endwhile; ?>
                     </table>
-                    <?php endif; ?>
-                <?php if ($invites->num_rows > 0): ?>
-                <table>
-                    <thead>
-                        <caption>Pending forms</caption>
-                        <th>Name</th>
-                        <th>Open</th>
-                    </thead>
-                    <?php while ($row = $invites->fetch_assoc()): ?>
-                        <?php
-                        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
-                        $host = $_SERVER['HTTP_HOST'];
-                        $form_url = $protocol . $host . "/form.php?id=" . urlencode($row["form_id"]);
-                        ?>
-                        <tr>
-                            <td>name</td>
-                            <td><button onclick="location.href='/form.php?id=<?= $row["form_id"] ?>'" class="primary-button">Open</button></td>
-                        </tr>
-                    <?php endwhile; ?>
-                </table>
                 <?php endif; ?>
-            </section>
+                <?php if ($invites->num_rows > 0): ?>
+                    <table>
+                        <thead>
+                            <caption>Pending forms</caption>
+                            <th>Name</th>
+                            <th>Open</th>
+                        </thead>
+                        <?php while ($row = $invites->fetch_assoc()): ?>
+                            <?php
+                            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
+                            $host = $_SERVER['HTTP_HOST'];
+                            $form_url = $protocol . $host . "/form.php?id=" . urlencode($row["form_id"]);
+                            ?>
+                            <tr>
+                                <td>name</td>
+                                <td><button onclick="location.href='/form.php?id=<?= $row["form_id"] ?>'" class="primary-button">Open</button></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </table>
+                <?php endif; ?>
+                </section>
         </section>
 
     <?php else: ?>

@@ -1,8 +1,5 @@
-#box{
-    background-color: var(--primary-color);
+#main{
     padding: 50px;
-    border: 2px solid var(--accent-color);
-    border-radius: 12px;
 }
 
 #form{

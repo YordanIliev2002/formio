@@ -90,11 +90,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title><?= htmlspecialchars($formDefinition["title"]) ?></title>
-    <link rel="stylesheet" href="/css/utils/body_formatter.css">
+    <link rel="stylesheet" href="/css/utils/common.css">
     <link rel="stylesheet" href="/css/form_style.css">
 </head>
 <body>
-    <section id="box">
+    <section id="main">
     <h2><?= htmlspecialchars($formDefinition["title"]) ?></h2>
     <p>
         <?= htmlspecialchars($formDefinition["description"]) ?>

@@ -1,8 +1,5 @@
-#box{
-    background-color: var(--primary-color);
+#main{
     padding: 100px;
-    border: 2px solid var(--accent-color);
-    border-radius: 12px;
 }
 
 #form{
@@ -18,16 +15,9 @@ form{
 }
 
 input[type="submit"] {
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-    padding: 5px 15px;
-    border: 2px solid var(--accent-color);
     border-radius: 12px;
 }
 
-input[type="submit"]:hover {
-    background-color: var(--accent-color);
-}
 #register{
     text-align: center; 
 

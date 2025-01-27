@@ -4,7 +4,7 @@ function fetchResponses() {
     $responses = [];
     $stmt = $conn->prepare("SELECT * FROM responses WHERE form_id = ?");
     $formId = $_POST["form_id"] ?? $_GET["form_id"];
-    $stmt->bind_param("s",$formId );
+    $stmt->bind_param("s", $formId);
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
@@ -17,7 +17,7 @@ function fetchInvites() {
     require 'utils/db_connection.php';
     $invites = [];
     $stmt = $conn->prepare("SELECT * FROM invites WHERE form_id = ?");
-    $stmt->bind_param("s",$formId );
+    $stmt->bind_param("s", $formId);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -38,8 +38,8 @@ function fetchInvites() {
 
     if(isset($_POST['export'])) {
         $data = [];
-        foreach($responses as $tableData) {
-                $data[] = json_decode($tableData['response'], true);
+        foreach($responses as $response) {
+            $data[] = json_decode($response['response'], true);
         }
         $jsonData = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         // TODO - check if downloader is the right one
@@ -72,11 +72,11 @@ function fetchInvites() {
             <th>Submitted At</th>
         </tr>
         </thead>
-         <?php foreach ($responses as $data): ?>
+         <?php foreach ($responses as $response): ?>
             
             <tr>        
-            <td><?php echo htmlspecialchars($data['author_fn']); ?></td>
-            <td><?php echo htmlspecialchars($data['submitted_at']); ?></td>
+            <td><?php echo htmlspecialchars($response['author_fn']); ?></td>
+            <td><?php echo htmlspecialchars($response['submitted_at']); ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
@@ -88,10 +88,10 @@ function fetchInvites() {
             <th>Has submitted</th>
         </tr>
         </thead>
-         <?php foreach ($invites as $data): ?>
+         <?php foreach ($invites as $invite): ?>
             <tr>        
-            <td><?php echo htmlspecialchars($data['faculty_number']); ?></td>
-            <td style="color: <?= ($data['did_submit']== "✓") ? 'green' : 'red'; ?>;"><?php echo htmlspecialchars($data['did_submit']); ?></td>
+            <td><?php echo htmlspecialchars($invite['faculty_number']); ?></td>
+            <td style="color: <?= ($invite['did_submit']== "✓") ? 'green' : 'red'; ?>;"><?php echo htmlspecialchars($data['did_submit']); ?></td>
             </tr>
         <?php endforeach; ?>
     </table>

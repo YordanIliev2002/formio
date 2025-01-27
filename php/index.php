@@ -9,7 +9,8 @@ if (isset($_SESSION["user_faculty_number"])) {
         JSON_UNQUOTE(JSON_EXTRACT(form_definition, '$.title')) AS title,
         JSON_UNQUOTE(JSON_EXTRACT(form_definition, '$.accessCode')) AS access_code,
         (SELECT count(*) from responses r where r.form_id = f.id) AS response_count
-        FROM forms f WHERE author_fn = ?");
+        FROM forms f WHERE author_fn = ?"
+    );
     $stmt->bind_param("s", $_SESSION["user_faculty_number"]);
     $stmt->execute();
     $user_forms = $stmt->get_result();
@@ -19,7 +20,6 @@ if (isset($_SESSION["user_faculty_number"])) {
     $stmt->execute();
     $invites = $stmt->get_result();
     $stmt->close();
-
 }
 ?>
 
@@ -99,7 +99,7 @@ if (isset($_SESSION["user_faculty_number"])) {
                         <?php endwhile; ?>
                     </table>
                 <?php endif; ?>
-                </section>
+            </section>
         </section>
     <?php else: ?>
         <h2 id="welcome">Welcome to Formio!</h2>

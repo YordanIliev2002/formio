@@ -19,28 +19,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Create a new form</title>
     <link rel="stylesheet" href="/css/utils/common.css">
     <link rel="stylesheet" href="/css/create_form_style.css">
 </head>
+
 <body>
     <section id="main">
-    <h2>Create a new form</h2>
-    <form method="POST" action="create_form.php">
-        <!-- TODO - validate the form on the client side too, for better feedback -->
-        <label for="form_definition">Form definition:</label>
-        <textarea id="form_definition" name="form_definition" rows="5" cols="33" placeholder="Put your form json definition here..."></textarea>
-        <p id="error"></p>
-        <input id="submit-button" disabled type="submit" value="Create form" class="primary-button">
-        <button type="button" onclick="location.href='index.php'" class="primary-button" >Return to Home instead</button>
-    </form>
+        <h2>Create a new form</h2>
+        <form method="POST" action="create_form.php">
+            <!-- TODO - validate the form on the client side too, for better feedback -->
+            <label for="form_definition">Form definition:</label>
+            <textarea id="form_definition" name="form_definition" rows="5" cols="33" placeholder="Put your form json definition here..."></textarea>
+            <p id="error"></p>
+            <input id="submit-button" disabled type="submit" value="Create form" class="primary-button">
+            <button type="button" onclick="location.href='index.php'" class="primary-button">Return to Home instead</button>
+        </form>
     </section>
 
     <script>
         function isNotEmpty(value) {
             return value !== undefined && value.trim() !== "";
         }
+
         function isFieldValid(field) {
             switch (field.type) {
                 case "text":
@@ -120,4 +123,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         })();
     </script>
 </body>
+
 </html>

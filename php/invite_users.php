@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php endif; ?>
             <input type="submit" value="Add users" class="primary-button">
         </form>
-        <button type="button" onclick="location.href='index.php'" class="primary-button" >Return to Home</button>
+        <button type="button" onclick="location.href='index.php'" class="primary-button">Return to Home</button>
     </section>
 </body>
 

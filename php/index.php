@@ -48,11 +48,11 @@ if (isset($_SESSION["user_faculty_number"])) {
                     ?>
                     <tr>
                     <td><?= htmlspecialchars($row["title"]) ?></td>
-                    <td><button onclick="location.href='/form.php?id=<?= $row["id"] ?>'" id="button_url">Open</button></td>
-                    <td><button onclick="copyToClipboard('<?= $form_url ?>')" id="button_url">Copy URL</button></td>
+                    <td><button onclick="location.href='/form.php?id=<?= $row["id"] ?>'" class="primary-button">Open</button></td>
+                    <td><button onclick="copyToClipboard('<?= $form_url ?>')" class="primary-button">Copy URL</button></td>
                     <td><p id="filled"><?= $row["response_count"] ?></p></td>
-                    <td><a href="invite_users.php?form_id=<?= $row["id"] ?>" id = "invite_users">Invite users</a></td>
-                    <td><a href="statistics.php?form_id=<?= $row["id"] ?>" id="stat_link">Statistics</a></td>
+                    <td><a href="invite_users.php?form_id=<?= $row["id"] ?>" class="primary-button">Invite users</a></td>
+                    <td><a href="statistics.php?form_id=<?= $row["id"] ?>" class="primary-button">Statistics</a></td>
                     </tr>
                 <?php endwhile; ?>
             </table>

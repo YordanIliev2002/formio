@@ -48,7 +48,7 @@ input[type="submit"]:hover {
     border-radius: 8px;
 }
 
-#return_home {
+.primary-button {
     display: inline-block;
     background-color: var(--secondary-color);
     color: var(--text-color);
@@ -64,6 +64,10 @@ input[type="submit"]:hover {
     margin-top: 10px;
 }
 
-#return_home:hover{
+.primary-button:hover{
     background-color: var(--accent-color);
+}
+
+#error {
+    color: red;
 }

@@ -1,55 +1,54 @@
 <?php
+function fetchResponses() {
     require 'utils/db_connection.php';
-    $dbData = [];
+    $responses = [];
     $stmt = $conn->prepare("SELECT * FROM responses WHERE form_id = ?");
     $formId = $_POST["form_id"] ?? $_GET["form_id"];
     $stmt->bind_param("s",$formId );
     $stmt->execute();
     $result = $stmt->get_result();
-
-    if($result->num_rows > 0){
-
-        while ($row = $result->fetch_assoc()) {
-             $dbData[] = $row;
-            
-        }
-        
+    while ($row = $result->fetch_assoc()) {
+        $responses[] = $row;
     }
-    $dbDataInvites = [];
+    $stmt->close();
+    return $responses;
+}
+function fetchInvites() {
+    require 'utils/db_connection.php';
+    $invites = [];
     $stmt = $conn->prepare("SELECT * FROM invites WHERE form_id = ?");
     $stmt->bind_param("s",$formId );
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if($result->num_rows > 0){
-        while ($row = $result->fetch_assoc()) {
-             $dbDataInvites[] = [
-                'faculty_number' => $row['faculty_number'],
-                'did_submit' => ($row['did_submit'] == 0) ? "𝕏" : "✓"
-             ];
-        }
-        
-    }
-
-    if(isset($_POST['export'])){
-        $data = [];
-        if($result->num_rows > 0){
-            foreach($dbData as $tableData) {
-                 $data[] = json_decode($tableData['response'], true);
-            }
-            $jsonData = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-// TODO - check if downloader is the right one
-            header('Content-Type: application/json');
-            header('Content-Disposition: attachment; filename="responses.json"');
-
-            echo $jsonData;
-            $stmt->close();
-            exit;
-        } else{
-            echo "There were no responses";
-        }
+    while ($row = $result->fetch_assoc()) {
+        $invites[] = [
+            'faculty_number' => $row['faculty_number'],
+            'did_submit' => ($row['did_submit'] == 0) ? "𝕏" : "✓"
+        ];
     }
     $stmt->close();
+    return $invites;
+}
+?>
+<?php
+    require 'utils/assert_user_is_logged_in.php';
+    $responses = fetchResponses();
+    $invites = fetchInvites();
+
+    if(isset($_POST['export'])) {
+        $data = [];
+        foreach($responses as $tableData) {
+                $data[] = json_decode($tableData['response'], true);
+        }
+        $jsonData = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        // TODO - check if downloader is the right one
+        header('Content-Type: application/json');
+        header('Content-Disposition: attachment; filename="responses.json"');
+
+        echo $jsonData;
+        exit;
+    }
 ?>
 
 <!DOCTYPE HTML>
@@ -60,10 +59,9 @@
     <section id="buttons">
     <form method="post">
         <input type="hidden" name="form_id" value="<?= htmlspecialchars($_GET["form_id"]) ?>">
-        <button type="submit" name="export" id = "export_button">Export</button>
+        <button type="submit" name="export" class="primary-button">Export</button>
     </form>
-
-    <a href="index.php" id="return_home">Return to Home</a>
+    <button type="button" onclick="location.href='index.php'" class="primary-button" >Return to Home instead</button>
     </section>
     <section id="tables">
     <table>
@@ -74,7 +72,7 @@
             <th>Submitted At</th>
         </tr>
         </thead>
-         <?php foreach ($dbData as $data): ?>
+         <?php foreach ($responses as $data): ?>
             
             <tr>        
             <td><?php echo htmlspecialchars($data['author_fn']); ?></td>
@@ -90,7 +88,7 @@
             <th>Has submitted</th>
         </tr>
         </thead>
-         <?php foreach ($dbDataInvites as $data): ?>
+         <?php foreach ($invites as $data): ?>
             <tr>        
             <td><?php echo htmlspecialchars($data['faculty_number']); ?></td>
             <td style="color: <?= ($data['did_submit']== "✓") ? 'green' : 'red'; ?>;"><?php echo htmlspecialchars($data['did_submit']); ?></td>

@@ -6,7 +6,7 @@
     --text-color: #333333;   
 }
 
-body{
+body {
     display: flex;
     place-items: center;
     background-color: var(--background-color);
@@ -17,7 +17,7 @@ body{
     flex-direction: column;
 }
 
-#return_home, #export_button {
+.primary-button {
     display: inline-block;
     background-color: var(--primary-color);
     color: var(--text-color);
@@ -29,20 +29,13 @@ body{
     border-bottom-right-radius: 12px;
     border: 2px solid var(--accent-color);
     font-size: 16px;
-    width: 150px;
+    width: 250px;
     margin-left: 10px;
-}
-
-#return_home{
-    padding: 8px 0px;
-    margin-top:5px;
-}
-
-#export_button{
     margin-bottom:5px;
     padding: 8px 18px;
 }
-#return_home:hover, #export_button:hover {
+
+.primary-button:hover {
     background-color: var(--secondary-color);
 }
 
@@ -61,7 +54,7 @@ th {
     font-weight: bold;
 }
 
-#tables{
+#tables {
     display:flex;
     gap:15px;
 }

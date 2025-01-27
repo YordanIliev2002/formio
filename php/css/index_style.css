@@ -6,7 +6,7 @@
     --text-color: #333333;   
 }
 
-body{
+body {
     display: flex;
     place-items: center;
     background-color: var(--background-color);
@@ -85,11 +85,7 @@ body{
     border: 2px solid var(--accent-color);
 }
 
-#hello{
-    text-align: left; 
-}
-
-#stat_link, #button_url, #invite_users{
+.primary-button {
     display: inline-block; 
     padding: 5px 15px;
     background-color: var(--primary-color);
@@ -100,7 +96,7 @@ body{
     border: 2px solid var(--accent-color);
 }
 
-#stat_link:hover, #button_url:hover, #invite_users:hover{
+.primary-button:hover {
     background-color: var(--secondary-color);
 }
 

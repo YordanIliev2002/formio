@@ -24,30 +24,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Register</title>
+    <link rel="stylesheet" href="/css/utils/common.css">
     <link rel="stylesheet" href="/css/register_style.css">
 </head>
-<body>
-    <section id="box">
-    <h2 id = "register">Register</h2>
-    <section id="form">
-    <form method="POST" action="register.php">
-        <label for="faculty_number">Faculty Number:</label>
-        <input type="text" name="faculty_number" id="faculty_number" required value="<?= htmlspecialchars($_GET['faculty_number'] ?? '') ?>">
 
-        <label for="user_name">Name:</label>
-        <input type="text" name="user_name" id="user_name" required value="<?= htmlspecialchars($_GET['user_name'] ?? '') ?>">
-        
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required>
-        
-        <?php if (isset($_GET["error"])): ?>
-          <p style="color: red;">Error occurred during reistration. Please try again.</p>
-        <?php endif ?>
-        <input type="submit" value="Register">
-    </form>
+<body>
+    <section id="main">
+        <h2 id="register">Register</h2>
+        <section id="form">
+            <form method="POST" action="register.php">
+                <label for="faculty_number">Faculty Number:</label>
+                <input type="text" name="faculty_number" id="faculty_number" required value="<?= htmlspecialchars($_GET['faculty_number'] ?? '') ?>">
+
+                <label for="user_name">Name:</label>
+                <input type="text" name="user_name" id="user_name" required value="<?= htmlspecialchars($_GET['user_name'] ?? '') ?>">
+
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required>
+
+                <?php if (isset($_GET["error"])): ?>
+                    <p style="color: red;">Error occurred during registration. Please try again.</p>
+                <?php endif ?>
+                <section id="buttons">
+                    <input type="submit" value="Register">
+            </form>
+            <button type="button" onclick="location.href='index.php'" class="primary-button">Back</button>
+        </section>
     </section>
     </section>
 </body>
+
 </html>

@@ -3,7 +3,8 @@ require 'utils/assert_user_is_logged_in.php';
 require 'utils/form_field_visualisations.php';
 require "utils/constants.php";
 
-function hasUserFilledForm($formId) {
+function hasUserFilledForm($formId)
+{
     require 'utils/db_connection.php';
     $stmt = $conn->prepare("SELECT COUNT(*) FROM responses WHERE form_id = ? AND author_fn = ?");
     $stmt->bind_param("ss", $formId, $_SESSION["user_faculty_number"]);
@@ -88,49 +89,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title><?= htmlspecialchars($formDefinition["title"]) ?></title>
+    <link rel="stylesheet" href="/css/utils/common.css">
     <link rel="stylesheet" href="/css/form_style.css">
 </head>
+
 <body>
-    <section id="box">
-    <h2><?= htmlspecialchars($formDefinition["title"]) ?></h2>
-    <p>
-        <?= htmlspecialchars($formDefinition["description"]) ?>
-    </p>
-    <?php if (hasUserFilledForm($_GET["id"])): ?>
-        <?php if (isset($_GET["success"])): ?>
-            <p>Thank you for filling out this form!</p>
+    <section id="main">
+        <h2><?= htmlspecialchars($formDefinition["title"]) ?></h2>
+        <p>
+            <?= htmlspecialchars($formDefinition["description"]) ?>
+        </p>
+        <?php if (hasUserFilledForm($_GET["id"])): ?>
+            <?php if (isset($_GET["success"])): ?>
+                <p>Thank you for filling out this form!</p>
+            <?php else: ?>
+                <p>You have already filled this form.</p>
+            <?php endif; ?>
+            <button onclick="location.href='index.php'" class="primary-button">Return to Home</button>
+        <?php elseif (!isset($_GET["access_code"]) && isset($formDefinition["accessCode"])): ?>
+            <p>This form requires an access code.</p>
+            <?php if (isset($_GET["access_code_error"])): ?>
+                <p style="color: red;">This access code is incorrect. Please try again.</p>
+            <?php endif; ?>
+            <form method="GET" action="form.php">
+                <input type="hidden" name="id" value="<?= htmlspecialchars($_GET["id"]) ?>">
+                <input type="text" name="access_code" placeholder="Access Code" class="text-field">
+                <section>
+                    <button type="submit" class="primary-button">Submit</button>
+                    <button type="button" onclick="location.href='index.php'" class="primary-button">Return to Home</button>
+                </section>
+            </form>
         <?php else: ?>
-            <p>You have already filled this form.</p>
+            <form method="POST" action="form.php" enctype="multipart/form-data">
+                <input type="hidden" name="form_id" value="<?= htmlspecialchars($_GET["id"]) ?>">
+                <input type="hidden" name="access_code" value="<?= htmlspecialchars($_GET["access_code"] ?? '') ?>">
+                <?php foreach ($formDefinition["fields"] as $field): ?>
+                    <?php visualizeField($field); ?>
+                <?php endforeach; ?>
+                <section>
+                    <input type="submit" class="primary-button" value="Submit">
+                    <button type="button" onclick="location.href='index.php'" class="primary-button">Return to Home</button>
+                </section>
+            </form>
         <?php endif; ?>
-        <button onclick="location.href='index.php'" class="primary-button" >Return to Home</button>
-    <?php elseif (!isset($_GET["access_code"]) && isset($formDefinition["accessCode"])): ?>
-        <p>This form requires an access code.</p>
-        <?php if (isset($_GET["access_code_error"])): ?>
-            <p style="color: red;">This access code is incorrect. Please try again.</p>
-        <?php endif; ?>
-        <form method="GET" action="form.php">
-            <input type="hidden" name="id" value="<?= htmlspecialchars($_GET["id"]) ?>">
-            <input type="text" name="access_code" placeholder="Access Code" class="text-field">
-            <section>
-                <button type="submit" class="primary-button">Submit</button>
-                <button type="button" onclick="location.href='index.php'" class="primary-button" >Return to Home</button>
-            </section>
-        </form>
-    <?php else: ?>
-        <form method="POST" action="form.php" enctype="multipart/form-data">
-            <input type="hidden" name="form_id" value="<?= htmlspecialchars($_GET["id"]) ?>">
-            <input type="hidden" name="access_code" value="<?= htmlspecialchars($_GET["access_code"] ?? '') ?>">
-            <?php foreach ($formDefinition["fields"] as $field): ?>
-                <?php visualizeField($field); ?>
-            <?php endforeach; ?>
-            <section>
-                <input type="submit" class="primary-button" value="Submit">
-                <button type="button" onclick="location.href='index.php'" class="primary-button" >Return to Home</button>
-            </section>
-        </form>
-    <?php endif; ?>
     </section>
 </body>
+
 </html>

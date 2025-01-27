@@ -1,28 +1,5 @@
-:root {
-    --primary-color: #E8F9FF;    
-    --secondary-color: #C4D9FF;  
-    --accent-color: #C5BAFF;    
-    --background-color: #FBFBFB; 
-    --text-color: #333333;      
-}
-
-
-body{
-    display: flex;
-    place-items: center;
-    background-color: var(--background-color);
-    justify-content: center;
-    align-items: center;  
-    font-family: 'Lato', sans-serif;
-    height: 100vh;
-    flex-direction: column;
-}
-
-#box{
-    background-color: var(--primary-color);
+#main{
     padding: 100px;
-    border: 2px solid var(--accent-color);
-    border-radius: 12px;
 }
 
 #form{
@@ -38,17 +15,36 @@ form{
 }
 
 input[type="submit"] {
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-    padding: 5px 15px;
-    border: 2px solid var(--accent-color);
     border-radius: 12px;
 }
 
-input[type="submit"]:hover {
-    background-color: var(--accent-color);
-}
 #register{
     text-align: center; 
 
 }
+
+#buttons{
+display: flex;
+flex-direction: column;
+gap:10px;
+}
+
+.primary-button {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    text-align: center;
+    text-decoration: none;
+    border-radius: 12px;
+    border: 2px solid var(--accent-color);
+    font-size: 16px;
+    margin-left: 10px;
+    margin-bottom:5px;
+    padding: 3px 15px;
+    width:150px;
+}
+
+.primary-button:hover {
+    background-color: var(--accent-color);
+}
+

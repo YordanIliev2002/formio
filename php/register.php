@@ -46,8 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if (isset($_GET["error"])): ?>
           <p style="color: red;">Error occurred during registration. Please try again.</p>
         <?php endif ?>
+        <section id="buttons">
         <input type="submit" value="Register">
     </form>
+    <button type="button" onclick="location.href='index.php'" class="primary-button" >Back</button>
+    </section>
     </section>
     </section>
 </body>

@@ -70,7 +70,7 @@ function fetchInvites() {
     <caption>Table of submissions: </caption>
         <thead>
         <tr>
-            <th>Author Name</th>
+            <th>Faculty Number</th>
             <th>Submitted At</th>
         </tr>
         </thead>

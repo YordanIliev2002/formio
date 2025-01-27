@@ -19,3 +19,7 @@
 .primary-button:hover {
     background-color: var(--secondary-color);
 }
+
+#tables {
+    gap:15px;
+}

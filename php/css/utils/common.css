@@ -67,6 +67,5 @@ th {
 
 #tables {
     display:flex;
-    gap:15px;
     align-items: start
 }

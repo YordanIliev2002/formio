@@ -8,11 +8,12 @@ if (isset($_SESSION["user_faculty_number"])) {
     $stmt->execute();
     $user_forms = $stmt->get_result();
     $stmt->close();
-    $stmt = $conn->prepare("SELECT form_id FROM invites WHERE faculty_number = ? AND did_submit = 0");
+    $stmt = $conn->prepare("SELECT form_id, JSON_UNQUOTE(JSON_EXTRACT(form_definition, '$.title')) AS title FROM invites INNER JOIN forms ON invites.form_id = forms.id WHERE faculty_number = ? AND did_submit = 0");
     $stmt->bind_param("s", $_SESSION["user_faculty_number"]);
     $stmt->execute();
     $invites = $stmt->get_result();
     $stmt->close();
+
 }
 ?>
 
@@ -85,7 +86,7 @@ if (isset($_SESSION["user_faculty_number"])) {
                             $form_url = $protocol . $host . "/form.php?id=" . urlencode($row["form_id"]);
                             ?>
                             <tr>
-                                <td>name</td>
+                                <td><?= htmlspecialchars($row["title"]) ?></td>
                                 <td><button onclick="location.href='/form.php?id=<?= $row["form_id"] ?>'" class="primary-button">Open</button></td>
                             </tr>
                         <?php endwhile; ?>

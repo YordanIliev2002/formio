@@ -98,3 +98,7 @@ caption{
     flex-direction: row;
     align-items: start;
 }
+
+#tables{
+    gap:150px;
+}

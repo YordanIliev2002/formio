@@ -49,7 +49,7 @@ if (isset($_SESSION["user_faculty_number"])) {
                     <tr>
                     <td><?= htmlspecialchars($row["title"]) ?></td>
                     <td><button onclick="location.href='/form.php?id=<?= $row["id"] ?>'" class="primary-button">Open</button></td>
-                    <td><button onclick="copyToClipboard('<?= $form_url ?>')" class="primary-button">Copy URL</button></td>
+                    <td><button id="copy-button-<?= $row["id"]?>"onclick="onCopyButtonClick('<?= $row["id"]?>', '<?= $form_url ?>')" class="primary-button">Copy URL</button></td>
                     <td><p id="filled"><?= $row["response_count"] ?></p></td>
                     <td><a href="invite_users.php?form_id=<?= $row["id"] ?>" class="primary-button">Invite users</a></td>
                     <td><a href="statistics.php?form_id=<?= $row["id"] ?>" class="primary-button">Statistics</a></td>
@@ -70,13 +70,18 @@ if (isset($_SESSION["user_faculty_number"])) {
 
 
     <script>
-        function copyToClipboard(url) {
+        function onCopyButtonClick(formId, url) {
             var textarea = document.createElement('textarea');
             textarea.value = url;
             document.body.appendChild(textarea);
             textarea.select();
             document.execCommand('copy');
             document.body.removeChild(textarea);
+            const button = document.getElementById('copy-button-' + formId);
+            button.innerHTML = 'Copied!';
+            setTimeout(() => {
+                button.innerHTML = 'Copy URL';
+            }, 1000);
         }
     </script>
 </body>

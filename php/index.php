@@ -3,7 +3,13 @@ session_start();
 if (isset($_SESSION["user_faculty_number"])) {
     // fetch the user's forms
     require 'utils/db_connection.php';
-    $stmt = $conn->prepare("SELECT id, JSON_UNQUOTE(JSON_EXTRACT(form_definition, '$.title')) AS title, (SELECT count(*) from responses r where r.form_id = f.id) AS 'response_count' FROM forms f WHERE author_fn = ?");
+    $stmt = $conn->prepare(
+        "SELECT
+        id,
+        JSON_UNQUOTE(JSON_EXTRACT(form_definition, '$.title')) AS title,
+        JSON_UNQUOTE(JSON_EXTRACT(form_definition, '$.accessCode')) AS access_code,
+        (SELECT count(*) from responses r where r.form_id = f.id) AS response_count
+        FROM forms f WHERE author_fn = ?");
     $stmt->bind_param("s", $_SESSION["user_faculty_number"]);
     $stmt->execute();
     $user_forms = $stmt->get_result();
@@ -36,6 +42,7 @@ if (isset($_SESSION["user_faculty_number"])) {
         </section>
 
         <section id="logged_your_forms">
+
             <section id="tables" class="<?= $user_forms->num_rows > 0 && $invites->num_rows > 0 ? "flex-row" : "flex-column" ?>">
                 <?php if ($user_forms->num_rows == 0): ?>
                     <h2>You don't have any forms yet. Use the button in upper right corner to create one.</h2>
@@ -119,6 +126,20 @@ if (isset($_SESSION["user_faculty_number"])) {
                 button.innerHTML = 'Copy URL';
             }, 1000);
         }
+
+        (() => {
+            const accessCodes = document.querySelectorAll('[accesscode]');
+            accessCodes.forEach((accessCode) => {
+                const code = accessCode.getAttribute('accesscode');
+                accessCode.textContent = "Hover to reveal";
+                accessCode.addEventListener('mouseover', () => {
+                    accessCode.textContent = code;
+                });
+                accessCode.addEventListener('mouseout', () => {
+                    accessCode.textContent = "Hover to reveal";
+                });
+            });
+        })();
     </script>
 </body>
 

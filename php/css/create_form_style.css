@@ -43,7 +43,15 @@ form{
     background-color: var(--accent-color);
 }
 
+.primary-button:disabled {
+    background-color: var(--background-color);
+}
+
 #form_definition{
     border: 2px solid var(--accent-color);
     border-radius: 8px;
+}
+
+#error {
+    color: red;
 }

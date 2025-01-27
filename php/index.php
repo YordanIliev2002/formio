@@ -54,6 +54,7 @@ if (isset($_SESSION["user_faculty_number"])) {
                                 <th>Form name</th>
                                 <th>Open</th>
                                 <th>Copy URL</th>
+                                <th>Access code</th>
                                 <th>Submissions</th>
                                 <th>Invite users</th>
                                 <th>Statistics</th>
@@ -70,6 +71,13 @@ if (isset($_SESSION["user_faculty_number"])) {
                                 <td><?= htmlspecialchars($row["title"]) ?></td>
                                 <td><button onclick="location.href='/form.php?id=<?= $row["id"] ?>'" class="primary-button">Open</button></td>
                                 <td><button id="copy-button-<?= $row["id"] ?>" onclick="onCopyButtonClick('<?= $row["id"] ?>', '<?= $form_url ?>')" class="primary-button">Copy URL</button></td>
+                                <td>
+                                    <?php if ($row["access_code"]): ?>
+                                        <p accesscode="<?= $row["access_code"] ?>">Hover to reveal</p>
+                                    <?php else: ?>
+                                        <p>-</p>
+                                    <?php endif; ?>
+                                </td>
                                 <td>
                                     <p id="filled"><?= $row["response_count"] ?></p>
                                 </td>

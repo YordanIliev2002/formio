@@ -54,7 +54,7 @@ function fetchInvites() {
 <!DOCTYPE HTML>
 <html>
     <head><title>Form statistics</title></head>
-    <link rel="stylesheet" href="/css/utils/body_formatter.css">
+    <link rel="stylesheet" href="/css/utils/common.css">
     <link rel="stylesheet" href="/css/statistics_style.css">
     <body>
     <section id="buttons">

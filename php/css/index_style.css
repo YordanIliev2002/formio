@@ -85,24 +85,7 @@
     font-style: italic;
 }
 
-/* TODO - extract this to a separate file */
-table {
-    border-collapse: collapse; 
-}
-
-th, td {
-    padding: 10px;
-    text-align: center; 
-    border: 1px solid var(--accent-color);
-    background-color: var(--primary-color);
-}
-
-th {
-    font-weight: bold;
-}
-
 #tables {
-    display:flex;
     gap:150px;
 }
 

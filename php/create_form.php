@@ -21,11 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <title>Create a new form</title>
-    <link rel="stylesheet" href="/css/utils/body_formatter.css">
+    <link rel="stylesheet" href="/css/utils/common.css">
     <link rel="stylesheet" href="/css/create_form_style.css">
 </head>
 <body>
-    <section id="box">
+    <section id="main">
     <h2>Create a new form</h2>
     <form method="POST" action="create_form.php">
         <!-- TODO - validate the form on the client side too, for better feedback -->

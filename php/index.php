@@ -21,7 +21,7 @@ if (isset($_SESSION["user_faculty_number"])) {
 
 <head>
     <title>Formio</title>
-    <link rel="stylesheet" href="/css/utils/body_formatter.css">
+    <link rel="stylesheet" href="/css/utils/common.css">
     <link rel="stylesheet" href="/css/index_style.css">
 </head>
 
@@ -91,7 +91,7 @@ if (isset($_SESSION["user_faculty_number"])) {
                         <?php endwhile; ?>
                     </table>
                 <?php endif; ?>
-            </section>
+                </section>
         </section>
     <?php else: ?>
         <h2 id="welcome">Welcome to Formio!</h2>

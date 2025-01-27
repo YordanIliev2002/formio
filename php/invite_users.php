@@ -29,12 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <head>
     <title>Invite Users</title>
-    <link rel="stylesheet" href="/css/utils/body_formatter.css">
+    <link rel="stylesheet" href="/css/utils/common.css">
     <link rel="stylesheet" href="/css/invite_users_style.css">
 </head>
 
 <body>
-    <section id="box">
+    <section id="main">
         <form method="POST">
             <label for="faculty_nums">Add invites:</label>
             <textarea id="faculty_nums" name="faculty_nums" rows="5" cols="33" placeholder="Add the faculty numbers of those you want to invite, separated by commas..."></textarea>

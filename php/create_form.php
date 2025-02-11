@@ -22,8 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
     <title>Create a new form</title>
-    <link rel="stylesheet" href="/css/utils/common.css">
-    <link rel="stylesheet" href="/css/create_form_style.css">
+    <link rel="stylesheet" href="css/utils/common.css">
+    <link rel="stylesheet" href="css/create_form_style.css">
 </head>
 
 <body>

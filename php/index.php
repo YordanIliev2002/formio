@@ -28,8 +28,8 @@ if (isset($_SESSION["user_faculty_number"])) {
 
 <head>
     <title>Formio</title>
-    <link rel="stylesheet" href="/css/utils/common.css">
-    <link rel="stylesheet" href="/css/index_style.css">
+    <link rel="stylesheet" href="css/utils/common.css">
+    <link rel="stylesheet" href="css/index_style.css">
 </head>
 
 <body>
@@ -65,11 +65,12 @@ if (isset($_SESSION["user_faculty_number"])) {
                             <?php
                             $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
                             $host = $_SERVER['HTTP_HOST'];
-                            $form_url = $protocol . $host . "/form.php?id=" . urlencode($row["id"]);
+                            $path = rtrim(dirname($_SERVER['PHP_SELF']), '/');
+                            $form_url = $protocol . $host . $path . "/form.php?id=" . urlencode($row["id"]);
                             ?>
                             <tr>
                                 <td><?= htmlspecialchars($row["title"]) ?></td>
-                                <td><button onclick="location.href='/form.php?id=<?= $row["id"] ?>'" class="primary-button">Open</button></td>
+                                <td><button onclick="location.href='<?= $form_url ?>'" class="primary-button">Open</button></td>
                                 <td><button id="copy-button-<?= $row["id"] ?>" onclick="onCopyButtonClick('<?= $row["id"] ?>', '<?= $form_url ?>')" class="primary-button">Copy URL</button></td>
                                 <td>
                                     <?php if ($row["access_code"]): ?>
@@ -98,11 +99,12 @@ if (isset($_SESSION["user_faculty_number"])) {
                             <?php
                             $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
                             $host = $_SERVER['HTTP_HOST'];
-                            $form_url = $protocol . $host . "/form.php?id=" . urlencode($row["form_id"]);
+                            $path = rtrim(dirname($_SERVER['PHP_SELF']), '/');
+                            $form_url = $protocol . $host . $path . "/form.php?id=" . urlencode($row["form_id"]);
                             ?>
                             <tr>
                                 <td><?= htmlspecialchars($row["title"]) ?></td>
-                                <td><button onclick="location.href='/form.php?id=<?= $row["form_id"] ?>'" class="primary-button">Open</button></td>
+                                <td><button onclick="location.href='<?= $form_url ?>'" class="primary-button">Open</button></td>
                             </tr>
                         <?php endwhile; ?>
                     </table>

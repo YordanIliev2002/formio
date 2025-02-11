@@ -11,7 +11,7 @@ C:\xampp\php\php.exe -S localhost:8000
 
 ## How to run it using XAMPP for demo
 - configure the credentials for the db in `db_connection.php`
-- create the folder `C:/xampp/uploads`
-- copy the contents of the PHP folder into `C:/xampp/htdocs/`
+- create the folder `C:/xampp/htdocs/whatever/uploads`
+- copy the contents of the PHP folder into `C:/xampp/htdocs/whatever`
 - run XAMPP - Apache and MySQL
 - execute `db.sql` inside the db

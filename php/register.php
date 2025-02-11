@@ -27,8 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
     <title>Register</title>
-    <link rel="stylesheet" href="/css/utils/common.css">
-    <link rel="stylesheet" href="/css/register_style.css">
+    <link rel="stylesheet" href="css/utils/common.css">
+    <link rel="stylesheet" href="css/register_style.css">
 </head>
 
 <body>

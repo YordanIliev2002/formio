@@ -60,8 +60,8 @@ if (isset($_POST['export'])) {
 <head>
     <title>Form statistics</title>
 </head>
-<link rel="stylesheet" href="/css/utils/common.css">
-<link rel="stylesheet" href="/css/statistics_style.css">
+<link rel="stylesheet" href="css/utils/common.css">
+<link rel="stylesheet" href="css/statistics_style.css">
 
 <body>
     <section id="buttons">

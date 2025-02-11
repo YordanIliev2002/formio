@@ -36,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <head>
     <title>Invite Users</title>
-    <link rel="stylesheet" href="/css/utils/common.css">
-    <link rel="stylesheet" href="/css/invite_users_style.css">
+    <link rel="stylesheet" href="css/utils/common.css">
+    <link rel="stylesheet" href="css/invite_users_style.css">
 </head>
 
 <body>

@@ -47,7 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? "https://" : "http://";
                 $host = $_SERVER['HTTP_HOST'];
-                $fileUrl = $protocol . $host . "/files.php?id=" . urlencode($fileId . "." . $fileExt);
+                $path = rtrim(dirname($_SERVER['PHP_SELF']), '/');
+                $fileUrl = $protocol . $host . $path. "/files.php?id=" . urlencode($fileId . "." . $fileExt);
 
                 if (move_uploaded_file($file["tmp_name"], $targetFile)) {
                     $fieldsAndValues[$field["name"]] = $fileUrl;
@@ -92,8 +93,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
     <title><?= htmlspecialchars($formDefinition["title"]) ?></title>
-    <link rel="stylesheet" href="/css/utils/common.css">
-    <link rel="stylesheet" href="/css/form_style.css">
+    <link rel="stylesheet" href="css/utils/common.css">
+    <link rel="stylesheet" href="css/form_style.css">
 </head>
 
 <body>

@@ -16,14 +16,13 @@ INSERT INTO `forms` VALUES
 ('a600169d-dcf6-11ef-a4fa-0242ac110002','10000','2025-01-27 21:35:37','{\"title\": \"Контролно по математика за трети клас\", \"fields\": [{\"name\": \"question-1\", \"type\": \"text\", \"label\": \"Колко е 2 + 2 * 3?\", \"required\": true}, {\"name\": \"question-1\", \"type\": \"text\", \"label\": \"Колко е 2 * 17?\", \"required\": true}, {\"name\": \"question-3\", \"type\": \"multiple_choice\", \"label\": \"Кое е най-голямото число?\", \"choices\": [\"5\", \"2\", \"-100\", \"99\", \"3\"], \"required\": true}, {\"name\": \"question-3\", \"type\": \"multiple_choice\", \"label\": \"Кой знак седи тук: 2 _ 3 = 6\", \"choices\": [\"+\", \"-\", \"*\", \"/\"], \"required\": true}, {\"name\": \"question-5\", \"type\": \"textarea\", \"label\": \"Опишете как ще сметнете 17 + 26 + 12\", \"required\": true}, {\"name\": \"question-5\", \"type\": \"textarea\", \"label\": \"Ако Иван има 5 жаби, и Петър му даде двойно повече, колко жаби има Иван? Опишете с уравнение.\", \"required\": true}], \"accessCode\": \"трети-б-клас\", \"description\": \"Успех!\"}');
 
 INSERT INTO `invites` VALUES
-('163a748f-dcf8-11ef-a4fa-0242ac110002','viki-321',1),
+('163a748f-dcf8-11ef-a4fa-0242ac110002','viki-321',0),
 ('163a748f-dcf8-11ef-a4fa-0242ac110002','yordan-123',0),
 ('a600169d-dcf6-11ef-a4fa-0242ac110002','30001',0),
 ('a600169d-dcf6-11ef-a4fa-0242ac110002','30002',1),
 ('a600169d-dcf6-11ef-a4fa-0242ac110002','30003',0);
 
 INSERT INTO `responses` VALUES
-('163a748f-dcf8-11ef-a4fa-0242ac110002','viki-321','2025-01-27 21:51:57','{\"cv\": \"http://localhost:8000/files.php?id=6797fffd134fe.pdf\", \"name\": \"Viktoria Nedelcheva\", \"email\": \"viki@nedelcheva.com\"}'),
 ('a600169d-dcf6-11ef-a4fa-0242ac110002','30002','2025-01-27 21:42:58','{\"question-1\": \"34\", \"question-3\": \"*\", \"question-5\": \"5 + 2 * 5 = 15\"}');
 
 

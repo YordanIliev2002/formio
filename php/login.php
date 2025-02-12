@@ -49,8 +49,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php endif ?>
 
                 <input type="submit" value="Login">
-
+                <button type="button" onclick="location.href='index.php'" class="primary-button">Back</button>
             </form>
+            
         </section>
     </section>
 </body>

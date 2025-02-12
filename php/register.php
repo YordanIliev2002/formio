@@ -6,9 +6,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_name = $_POST["user_name"];
     $password = $_POST["password"];
     $password_hash = password_hash($password, PASSWORD_BCRYPT);
+    $mail = $_POST["mail"];
 
-    $stmt = $conn->prepare("INSERT INTO users (faculty_number, user_name, password_hash) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $facultyNumber, $user_name, $password_hash);
+    $stmt = $conn->prepare("INSERT INTO users (faculty_number, user_name, password_hash, mail) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $facultyNumber, $user_name, $password_hash, $mail);
     try {
         $stmt->execute();
         session_start();
@@ -38,6 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form method="POST" action="register.php">
                 <label for="faculty_number">Faculty Number:</label>
                 <input type="text" name="faculty_number" id="faculty_number" required value="<?= htmlspecialchars($_GET['faculty_number'] ?? '') ?>">
+
+                <label for="mail">Mail:</label>
+                <input type="text" name="mail" id="mail" required value="<?= htmlspecialchars($_GET['mail'] ?? '') ?>">
 
                 <label for="user_name">Name:</label>
                 <input type="text" name="user_name" id="user_name" required value="<?= htmlspecialchars($_GET['user_name'] ?? '') ?>">

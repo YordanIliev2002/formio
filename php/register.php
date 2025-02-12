@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" name="faculty_number" id="faculty_number" required value="<?= htmlspecialchars($_GET['faculty_number'] ?? '') ?>">
 
                 <label for="mail">Mail:</label>
-                <input type="text" name="mail" id="mail" required value="<?= htmlspecialchars($_GET['mail'] ?? '') ?>">
+                <input type="email" name="mail" id="mail" required value="<?= htmlspecialchars($_GET['mail'] ?? '') ?>">
 
                 <label for="user_name">Name:</label>
                 <input type="text" name="user_name" id="user_name" required value="<?= htmlspecialchars($_GET['user_name'] ?? '') ?>">

@@ -4,12 +4,12 @@ all passwords are 'pass'
 ```
 SET NAMES utf8mb4;
 INSERT INTO `users` VALUES
-('10000','Teacher Teacherson','$2y$12$knjyfSOZPcG8iuGUhem9vuHL4QaGFYecBqInEuIfW/1DlncK8HXT6'),
-('30001','Иван Иванов','$2y$12$J38cacoXdh.oO5SB9UA2v.P8Tw1PDbNGMJJ8YUIin5v8mIXPApVtC'),
-('30002','Петър Петров','$2y$12$jQon4A6vYnAp2T3NVvkEdOFLyHczWDDZEjjl/Wbjp4ZONuUTOxRwi'),
-('30003','Мария Мариева','$2y$12$WiMVXBQRr1ZNFutVD0qifeZQ80nP6txcFbNvFMwiSivo0XF2ePeIy'),
-('viki-321','Viktoria Nedelcheva','$2y$12$iz.ckJwXSjNDdE8KjlmilOI6XqENLIbqdU1HfOBV2rrsXHn1ojRlO'),
-('yordan-123','Yordan Iliev','$2y$12$/t6T86xBrGQ3vNnsSqWzf.5J1pxG0nqs68ynOsJ1b2P7rIqajpos6');
+('10000','Teacher Teacherson','$2y$12$knjyfSOZPcG8iuGUhem9vuHL4QaGFYecBqInEuIfW/1DlncK8HXT6', 'teacher@abv.bg'),
+('30001','Иван Иванов','$2y$12$J38cacoXdh.oO5SB9UA2v.P8Tw1PDbNGMJJ8YUIin5v8mIXPApVtC', 'ivan@abv.bg'),
+('30002','Петър Петров','$2y$12$jQon4A6vYnAp2T3NVvkEdOFLyHczWDDZEjjl/Wbjp4ZONuUTOxRwi', 'petar@abv.bg'),
+('30003','Мария Мариева','$2y$12$WiMVXBQRr1ZNFutVD0qifeZQ80nP6txcFbNvFMwiSivo0XF2ePeIy', 'maria@abv.bg'),
+('viki-321','Viktoria Nedelcheva','$2y$12$iz.ckJwXSjNDdE8KjlmilOI6XqENLIbqdU1HfOBV2rrsXHn1ojRlO', 'viki@gmail.com'),
+('yordan-123','Yordan Iliev','$2y$12$/t6T86xBrGQ3vNnsSqWzf.5J1pxG0nqs68ynOsJ1b2P7rIqajpos6', 'yordan@gmail.com');
 
 INSERT INTO `forms` VALUES
 ('163a748f-dcf8-11ef-a4fa-0242ac110002','10000','2025-01-27 21:45:55','{\"theme\": \"blue\", \"title\": \"Application form for HoM\", \"fields\": [{\"name\": \"name\", \"type\": \"text\", \"label\": \"Name\", \"required\": true}, {\"name\": \"email\", \"type\": \"text\", \"label\": \"Email\", \"required\": true}, {\"name\": \"profile_picture\", \"type\": \"file\", \"label\": \"Profile picture\", \"fileType\": \"image/*\", \"required\": false}, {\"name\": \"cv\", \"type\": \"file\", \"label\": \"CV\", \"fileType\": \".pdf\", \"required\": true}], \"description\": \"Apply for our new position as a Head of Marketing\"}'),

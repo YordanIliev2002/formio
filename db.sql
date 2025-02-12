@@ -4,7 +4,8 @@ USE formio;
 CREATE TABLE IF NOT EXISTS users(
     faculty_number VARCHAR(255) PRIMARY KEY,
     user_name VARCHAR(255) NOT NULL,
-    password_hash VARCHAR(255) NOT NULL
+    password_hash VARCHAR(255) NOT NULL,
+    mail VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS forms (

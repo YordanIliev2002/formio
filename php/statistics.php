@@ -3,7 +3,7 @@ function fetchResponses()
 {
     require 'utils/db_connection.php';
     $responses = [];
-    $stmt = $conn->prepare("SELECT * FROM responses WHERE form_id = ?");
+    $stmt = $conn->prepare("SELECT responses.*, users.mail as mail FROM responses JOIN users ON users.faculty_number = responses.author_fn WHERE form_id = ?");
     $formId = $_POST["form_id"] ?? $_GET["form_id"];
     $stmt->bind_param("s", $formId);
     $stmt->execute();
@@ -42,7 +42,9 @@ $invites = fetchInvites();
 if (isset($_POST['export'])) {
     $data = [];
     foreach ($responses as $response) {
-        $data[] = json_decode($response['response'], true);
+        $obj = json_decode($response['response'], true);
+        $obj["_faculty_number"] = $response["author_fn"];
+        $data[] = $obj;
     }
     $jsonData = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     // TODO - check if downloader is the right one
@@ -77,6 +79,7 @@ if (isset($_POST['export'])) {
             <thead>
                 <tr>
                     <th>Faculty Number</th>
+                    <th>Mail</th>
                     <th>Submitted At</th>
                 </tr>
             </thead>
@@ -84,6 +87,7 @@ if (isset($_POST['export'])) {
 
                 <tr>
                     <td><?php echo htmlspecialchars($response['author_fn']); ?></td>
+                    <td><?php echo htmlspecialchars($response['mail']); ?></td>
                     <td><?php echo htmlspecialchars($response['submitted_at']); ?></td>
                 </tr>
             <?php endforeach; ?>
